@@ -73,7 +73,7 @@ var MyList = React.createClass({
         },
          
         accepts: function (el, target) {
-            console.log(target.id);
+          //  console.log(target.id);
             if(target.id == 'int')
                 return false;
             else

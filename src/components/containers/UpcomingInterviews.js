@@ -146,7 +146,7 @@ var UpcomingInterviews = React.createClass({
 					});
 					return;
 				}
-				console.log(i+'='+flag);
+				//console.log(i+'='+flag);
 				if(flag == 0)
 				{
 					APIManager.get('/api/users/'+user, null,  function(res) {
