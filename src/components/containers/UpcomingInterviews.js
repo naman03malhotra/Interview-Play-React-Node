@@ -109,7 +109,6 @@ var UpcomingInterviews = React.createClass({
 		var IDs_users = [];
 		var ID_int;		
 		var that = this;
-		var flag = 0;
 		
 		$("#drop-zone-can").find("li").each(function(){ IDs_users.push(this.id); });
 		$("#drop-zone-int").find("li").each(function(){ ID_int = this.id; });
@@ -135,36 +134,30 @@ var UpcomingInterviews = React.createClass({
 		};
 
 		IDs_users.forEach(function(user,i){
-			//flag = 0;
+			
 			
 			APIManager.get('/api/intPlay/?user_id='+user, null, function(res){
 
 				if(res.results.length>0){			 			
-					flag = 1;
+					
 					APIManager.get('/api/users/'+user, null,  function(res) {
 						alert('Added candidate ['+(res.result.name.first+' '+res.result.name.last)+'] has already been assigned an Interview!! Please remove and add another.');
 					});
 					return;
 				}
-				//console.log(i+'='+flag);
-				if(flag == 0)
-				{
-					APIManager.get('/api/users/'+user, null,  function(res) {
-						newInterview.users.push(res.result);	 
-						
-						APIManager.get('/api/int/'+ID_int, null,  function(res) {
-							newInterview.interviewer = res.result;     
+				
+				APIManager.get('/api/users/'+user, null,  function(res) {
+					newInterview.users.push(res.result);	 
+					
+					APIManager.get('/api/int/'+ID_int, null,  function(res) {
+						newInterview.interviewer = res.result;     
 
-							that.setState({
-								interview: newInterview
-							})  	
-							$('#modal-commence').modal('show'); 				
-						});
-						
-						
-
+						that.setState({
+							interview: newInterview
+						})  	
+						$('#modal-commence').modal('show'); 				
 					});
-				}
+				});			
 			});
 
 		});
