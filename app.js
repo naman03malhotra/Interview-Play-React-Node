@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/interview-app', function(err, res){
+mongoose.connect('mongodb://naman:naman@ds157549.mlab.com:57549/interview-app', function(err, res){
 	if(err)
 		console.log('DB FAILED');
 	else

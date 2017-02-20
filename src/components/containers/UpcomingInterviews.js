@@ -42,7 +42,7 @@ var UpcomingInterviews = React.createClass({
 				int_id:'',
 				timeOfInterview:''
 			};
-			
+
 			if($(this).val() != ''){
 				var currDate = new Date().getTime();
 				var selectedDate = new Date($(this).val()).getTime();
@@ -62,7 +62,7 @@ var UpcomingInterviews = React.createClass({
 			newConfirmInt.int_id = $(this).attr("data_int");
 
 			newDataConfirm.push(newConfirmInt);
-			
+
 		});
 		
 		
@@ -160,7 +160,7 @@ var UpcomingInterviews = React.createClass({
 					}
 					else
 					{
-						alert('Added candidate has already been assigned an Interview!! Please remove and add another.');
+						alert('Added candidate ['+(res.result.name.first+' '+res.result.name.last)+'] has already been assigned an Interview!! Please remove and add another.');
 					}	
         					
 			});
