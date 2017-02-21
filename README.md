@@ -2,7 +2,6 @@
 
 Assign Interviews using a drag and drop interface.
 
-  > Default hashtag is #trump
 
 # Live Demo
 
