@@ -30,6 +30,10 @@ From your terminal/cmd run, this will load all the dependencies
 ```
 $ npm install
 ```
+Install nodemon globally  
+```
+$ npm install -g nodemon
+```
 To build bundle.js (Combines all JS into one.)
 ```
 $ webpack
