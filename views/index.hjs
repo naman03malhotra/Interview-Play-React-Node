@@ -22,12 +22,8 @@
 				</div>	
 				 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
-
-                        <li class="hvr-underline-from-center"><a id="demo-start">See How this Works?</a></li>
-
-                        
+                        <li class="hvr-underline-from-center"><a id="demo-start">See How this Works?</a></li>                        
                     </ul>
-
                 </div>			
 			</div>
 		</nav>
