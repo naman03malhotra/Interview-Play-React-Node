@@ -38,6 +38,12 @@ var App = React.createClass({
 
     sessionStorage.setItem('demo','1');
   },
+  /**
+   * Toggles Search
+   * @param  {[string]} id  [source-id]
+   * @param  {[string]} id1 [target-id]
+   * @return void     
+   */
   toggleX: function(id,id1)
   {
 
