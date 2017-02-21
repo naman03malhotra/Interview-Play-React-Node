@@ -35,11 +35,4 @@ var interviewerSchema = mongoose.Schema({
 var Interviewers = module.exports = mongoose.model('Interviewers',interviewerSchema);
 
 
-// Get interviewers
-
-module.exports.getInterviewers = function(callback,limit){
-	Interviewers.find(callback).limit(limit);
-}
-
-
 

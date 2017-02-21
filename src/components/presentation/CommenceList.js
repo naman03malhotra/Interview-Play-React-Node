@@ -1,16 +1,15 @@
+/**
+ * Component for rendering Commence List, the list you see after hitting commence Interview.
+ */
+
 var React = require('react');
-var ReactDOM = require('react-dom');
-
-
 var MyButton = require('./MyButton');
 
 
 var CommenceList = React.createClass({
     
     render: function(){
-      // console.log(this.props.buttonData);
         var listMapped = this.props.listDataUsers.map(function(list, index){
-
             return (
                 
                                     <li  key={index} id={list._id+'-'+this.props.listDataInterviewer._id} className="list-group-item card_org">
@@ -29,8 +28,7 @@ var CommenceList = React.createClass({
                                             <span className="name">{this.props.listDataInterviewer.name.first + ' '+ this.props.listDataInterviewer.name.last}</span>
                                         </div>
                                         <div className="clearfix"></div>
-                                    </li>
-               
+                                    </li> 
 
 
                 );
@@ -44,11 +42,7 @@ var CommenceList = React.createClass({
                 <MyButton attributes= {this.props.buttonData}/>
          </div>
         );
-    },
-  componentDidMount: function () {
-       
-   
-  }
+    }
 });
 
 module.exports = CommenceList;

@@ -1,3 +1,7 @@
+/**
+ * Modal Commence
+ */
+
 var React = require('react');
 var CommenceList = require('../presentation/CommenceList');
 

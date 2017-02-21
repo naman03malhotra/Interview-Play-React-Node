@@ -1,7 +1,14 @@
+/**
+ * Component for Rendering candidate and Interview list
+ */
+
 var React = require('react');
-var ReactDOM = require('react-dom');
+var ReactDOM = require('react-dom')
 var dragula = require('react-dragula');
 var ReactTooltip = require('react-tooltip')
+
+
+
 var MyList = React.createClass({
 
     render: function(){
@@ -50,8 +57,11 @@ var MyList = React.createClass({
          </div>
         );
     },
+    /**
+     * Adding Drag and drop functionality using dragula.
+     */
   componentDidMount: function () {
-       
+    // if source is candidate list
     if(this.props.listType == 'can')
     {
         var containerCan = ReactDOM.findDOMNode(this);
@@ -62,13 +72,12 @@ var MyList = React.createClass({
         drake_can.containers.push(containerCan, dropCandidate);
        
     }
-    else
+    else // if source is Interviewer list
     {
         var containerInt = ReactDOM.findDOMNode(this);
         var dropInterviewers =  document.getElementById('drop-zone-int');
         var drake_int = dragula({
-          copy: function (el, source) {
-           // console.log(source == containerInt);
+          copy: function (el, source) {           
             return source == containerInt;
         },
          
@@ -89,13 +98,9 @@ var MyList = React.createClass({
             if($('#drop-zone-int')[0].children.length > 1 && $(el).parent()[0].id=='drop-zone-int')
             {
                 drake_int.cancel();
-                alert('You can only add one Interviewer at a time.');
-                
-            }
-
-           
-        });
-        
+                alert('You can add only one Interviewer at a time.');                
+            }           
+        });      
        
     }
   }

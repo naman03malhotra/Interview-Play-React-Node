@@ -1,12 +1,18 @@
+/**
+ * Container Component to lead and manage Upcoming List state.
+ */
+
 var React = require('react');
 var UpcomingList = require('../presentation/upcomingList');
 var APIManager = require('../../utils');
 var MyButton = require('../presentation/MyButton');
 var ModalCommence = require('./ModalCommence');
-
 var APIManager = require('../../utils');
+var NProgress = require('NProgress');
+
 
 var UpcomingInterviews = React.createClass({
+	// Intial States
 	getInitialState: function(){
 		return {
 			interview:{
@@ -19,23 +25,19 @@ var UpcomingInterviews = React.createClass({
 					color:'',
 					block: null
 				}
-			},
-			confirmInt:{
-				user_id:'',
-				int_id:'',
-				timeOfInterview:''
-			},
+			},			
 			upcomingInt:{
 				users:{}
 			},
 			Data:[]
 		}
 	},
+	// Runs when you hit confirm Interview.
 	confirmInterview: function(){
 		var that = this;
 		
 		var newDataConfirm = [];
-		var flag = 0, flag2 = 0;
+		var flag = 0;
 		$('#ComList').find("input").each(function(i,inp){ 
 			var newConfirmInt = {
 				user_id:'',
@@ -43,17 +45,21 @@ var UpcomingInterviews = React.createClass({
 				timeOfInterview:''
 			};
 
-			if($(this).val() != ''){
-				var currDate = new Date().getTime();
-				var selectedDate = new Date($(this).val()).getTime();
-				if(selectedDate>currDate)
-					newConfirmInt.timeOfInterview = $(this).val();
-				else{
-					flag2 = 1;
+			if($(this).val() != '')
+				{
+					var currDate = new Date().getTime();
+					var selectedDate = new Date($(this).val()).getTime();
+
+					if(selectedDate>currDate)
+						newConfirmInt.timeOfInterview = $(this).val();
+				else
+				{
+					flag = 2;
 					return;
 				}
 			}
-			else{				
+			else
+			{				
 				flag = 1;
 				return;
 			}
@@ -66,11 +72,11 @@ var UpcomingInterviews = React.createClass({
 		});
 		
 		
-		if(flag == 1){
+		if(flag == 1) {
 			alert('Please Enter a valid date and time');
 			return;
 		}
-		if(flag2 == 1){
+		if(flag == 2) {
 			alert('Please Enter a date greater that today\'s date');
 			return;
 		}
@@ -79,6 +85,7 @@ var UpcomingInterviews = React.createClass({
 
 			var newUpcomingInt = this.state.upcomingInt;
 			var newData = this.state.Data;
+			
 
 			APIManager.post('/api/intPlay/', newDataConfirm, function(res){
 				console.log(res);
@@ -94,10 +101,10 @@ var UpcomingInterviews = React.createClass({
 							$('#modal-commence').modal('hide'); 
 							$('#drop-zone-can').html('Drag and Drop Candidates'); 
 							$('#drop-zone-int').html('Drag and Drop interviewer'); 
-							//$('#ComList').html('');	
 							that.setState({
 								Data: newData
 							})
+							
 						});
 
 					});
@@ -105,6 +112,7 @@ var UpcomingInterviews = React.createClass({
 			});			
 		}
 	},
+	// Runs when you hit Commence Interview.
 	commenceInterview: function(){
 		var IDs_users = [];
 		var ID_int;		
@@ -133,6 +141,9 @@ var UpcomingInterviews = React.createClass({
 			}
 		};
 
+		NProgress.start();  
+		NProgress.set(0.6); 
+
 		IDs_users.forEach(function(user,i){
 			
 			
@@ -142,7 +153,9 @@ var UpcomingInterviews = React.createClass({
 					
 					APIManager.get('/api/users/'+user, null,  function(res) {
 						alert('Added candidate ['+(res.result.name.first+' '+res.result.name.last)+'] has already been assigned an Interview!! Please remove and add another.');
+						NProgress.done(); 
 					});
+
 					return;
 				}
 				
@@ -155,7 +168,8 @@ var UpcomingInterviews = React.createClass({
 						that.setState({
 							interview: newInterview
 						})  	
-						$('#modal-commence').modal('show'); 				
+						$('#modal-commence').modal('show'); 	
+						NProgress.done(); 			
 					});
 				});			
 			});
@@ -164,38 +178,48 @@ var UpcomingInterviews = React.createClass({
 		
 		
 	},
+	// Initialize Upcoming List
 	componentDidMount: function(){
 		var that = this;
 		var newUpcomingInt = this.state.upcomingInt;
 
 		var newData = this.state.Data;
+		NProgress.start();  
+		NProgress.set(0.6); 
 
 		APIManager.get('/api/intPlay/', null, function(res){
 			console.log(res);	
 
-			res.results.forEach(function(user,i){
-				APIManager.get('/api/users/'+user.user_id, null,  function(res) {
-					newUpcomingInt.users[i] = res.result ;
-					newUpcomingInt.users[i].timeOfInterview = user.timeOfInterview;
+			if(res.results.length>0) {
 
-					APIManager.get('/api/int/'+user.int_id, null,  function(res) {
-						newUpcomingInt.users[i].interviewer = res.result;  
+				res.results.forEach(function(user,i){
+					APIManager.get('/api/users/'+user.user_id, null,  function(res) {
+						newUpcomingInt.users[i] = res.result ;
+						newUpcomingInt.users[i].timeOfInterview = user.timeOfInterview;
+
+						APIManager.get('/api/int/'+user.int_id, null,  function(res) {
+							newUpcomingInt.users[i].interviewer = res.result;  
 
 							newData.push(newUpcomingInt.users[i]);
 							//console.log(newData);
 							that.setState({
 								Data: newData
 							})
+							NProgress.done(); 
+
 						});
 
-				});				
+					});				
 
 
-			});					
+				});	
+			}	
+
 		});
 		
 	},
 	render: function(){
+		// attibutes for MyButton
 		var attrib = {
 			onClick: this.commenceInterview,
 			text:'Commence Interview',
@@ -207,7 +231,7 @@ var UpcomingInterviews = React.createClass({
 					<MyButton attributes= {attrib}/>
 					<br/>
                      <div className="col-xs-12 col-md-12">
-                        <div className="panel panel-default">
+                        <div className="panel panel-default" data-step="8" data-intro="Upcoming Interviews are displayed here.">
                            <div className="panel-heading c-list text-center">
                               <span className="title">Upcoming Interviews</span>
                              

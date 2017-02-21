@@ -1,17 +1,25 @@
-/*
- Require Basic Modules
+/**
+ * Require jQuery
  */
-$ = jQuery = require('jquery');
+ $ = jQuery = require('jquery');
 
-var searchable = require('jquery.searchable');
+/**
+ * Load jQuery Searchable
+ */ 
+ var searchable = require('jquery.searchable');
 
 
 /**
-Nprogress loading bar
-*/
-var NProgress = require('NProgress');
+ * Nprogress loading bar
+ */
 
+ var NProgress = require('NProgress');
 
+/**
+ * Require IntroJs
+ */
+
+ var introjs = require('intro.js');
 
 /**
  * Bootstrap loading
@@ -20,51 +28,43 @@ var NProgress = require('NProgress');
  var bootstrap = require('bootstrap');
 
 
+$(function () {
+   
+    $('a[href="#modal-add"]').on('click', function(event) {
+        event.preventDefault();
+        $('#modal-add').modal('show');
+    });
+    $('#demo-start').on('click', function(event) {
+        event.preventDefault();
+        introjs.introJs().start();
+    });
 
-
-
-
-// device detection
-var isMobile = false;
-if (/Mobi/.test(navigator.userAgent))
-    isMobile = true;
-
-
-
-
-
-
-$("#con_hit").click(function(){
-    console.log('Connect');
 
 });
 
+/**
+ * Initalizing React App
+ */
+
+
+
+ var React = require('react');
+ var ReactDOM = require('react-dom');
+ var App = require('./components/Main');
+
+
+
+ ReactDOM.render(<App/>, document.getElementById('app'));
 
 
 
 
+/**
+ *  Enable if you want to drag the dom using mouse.
+ */
 
-$(document).ready(function()
-{
-
-
-   // init(data,data2);
-    /*mixpanel.track("Initial Hit");
-  if (!document.cookie || !localStorage.getItem('data'))
-  {
-        //console.log('localStorage not set');
-        d(displayData);
-
-    }
-     else
-    {
-        console.log('localStorage set');
-        var data = localStorage.getItem('data');
-        displayData(JSON.parse(data));
-    }*/
-
-});
 /*
+
 $(window).mousemove(function (e) {
     var x = $(window).innerHeight() - 50,
         y = $(window).scrollTop() + 50;
@@ -85,58 +85,5 @@ $(window).mousemove(function (e) {
         });
     }
 });
+
 */
-
-$(function () {
-
-    if (window.location == window.parent.location) {
-        $('#back-to-bootsnipp').removeClass('hide');
-    }
-
-
-    $('[data-toggle="tooltip"]').tooltip();
-
-    $('a[href="#modal-add"]').on('click', function(event) {
-        event.preventDefault();
-        $('#modal-add').modal('show');
-    })
-   
-
-    $('#contact-list').searchable({
-        searchField: '#contact-list-search',
-        selector: 'li',
-        childSelector: '.col-xs-12',
-        show: function( elem ) {
-            elem.slideDown(100);
-        },
-        hide: function( elem ) {
-            elem.slideUp( 100 );
-        }
-    })
-
-    $('#contact-list2').searchable({
-        searchField: '#contact-list-search2',
-        selector: 'li',
-        childSelector: '.col-xs-12',
-        show: function( elem ) {
-            elem.slideDown(100);
-        },
-        hide: function( elem ) {
-            elem.slideUp( 100 );
-        }
-    })
-});
-
-
-
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-var App = require('./components/Main');
-
-
-
-
-ReactDOM.render(<App/>, document.getElementById('app'));
-

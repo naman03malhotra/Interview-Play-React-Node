@@ -1,3 +1,7 @@
+/**
+ * Modal for Add new candidate
+ */
+
 var React = require('react');
 
 

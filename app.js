@@ -5,8 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
 //var monUrl = 'mongodb://localhost/interview-app';
+
+// Mlab Url
 var monUrl = 'mongodb://naman:naman@ds157549.mlab.com:57549/interview-app';
+
 mongoose.connect(monUrl, function(err, res){
 	if(err)
 		console.log('DB FAILED');

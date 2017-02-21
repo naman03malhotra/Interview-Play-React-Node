@@ -1,8 +1,7 @@
 var express = require('express');
-
 var router = express.Router();
-
 var controllers = require('../controllers');
+
 
 router.get('/:resource', function(req, res, next){
 	var resource = req.params.resource;

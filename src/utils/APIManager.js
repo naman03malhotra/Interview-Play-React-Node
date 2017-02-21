@@ -1,3 +1,8 @@
+/**
+ * Api Manager Module
+ * Used ES6 arrow function
+ */
+
 module.exports = {
 
 	get: (url, params, callback) => {

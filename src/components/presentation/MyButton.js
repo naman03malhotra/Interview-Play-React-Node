@@ -1,3 +1,7 @@
+/**
+ * Button Component
+ */
+
 var React = require('react');
 
 var MyButton = React.createClass({

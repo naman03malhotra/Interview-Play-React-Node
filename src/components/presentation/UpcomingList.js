@@ -1,6 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+/**
+ * Component for Rendering upcoming list.
+ */
 
+var React = require('react');
 var ReactTooltip = require('react-tooltip');
 
 
@@ -8,9 +10,9 @@ var ReactTooltip = require('react-tooltip');
 var UpcomingList = React.createClass({
 
     render: function(){
-       //var intData = this.props.listData.interviewer;
+    
         var listMapped = this.props.listData.map(function(list, index){
-           var date = new Date(list.timeOfInterview).toGMTString()
+           var date = new Date(list.timeOfInterview).toGMTString();
             return (
                 
                                     <li  key={index} id={list._id} className="list-group-item card_org">
@@ -75,16 +77,10 @@ var UpcomingList = React.createClass({
         }.bind(this));
     return (
        <div id={this.props.listType}>
-                {listMapped}
-              
-         </div>
+                {listMapped}            
+       </div>
         );
-    },
-  componentDidMount: function () {
-       
-    
-   
-  }
+    }
 });
 
 module.exports = UpcomingList;
