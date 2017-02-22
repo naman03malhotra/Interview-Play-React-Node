@@ -194,13 +194,15 @@ var UpcomingInterviews = React.createClass({
 
 				res.results.forEach(function(user,i){
 					APIManager.get('/api/users/'+user.user_id, null,  function(res) {
-						newUpcomingInt.users[i] = res.result ;
-						newUpcomingInt.users[i].timeOfInterview = user.timeOfInterview;
+						//BugFixed
+						if(res.result != null) {
+							newUpcomingInt.users[i] = res.result ;
+							newUpcomingInt.users[i].timeOfInterview = user.timeOfInterview;
 
-						APIManager.get('/api/int/'+user.int_id, null,  function(res) {
-							newUpcomingInt.users[i].interviewer = res.result;  
+							APIManager.get('/api/int/'+user.int_id, null,  function(res) {
+								newUpcomingInt.users[i].interviewer = res.result;  
 
-							newData.push(newUpcomingInt.users[i]);
+								newData.push(newUpcomingInt.users[i]);
 							//console.log(newData);
 							that.setState({
 								Data: newData
@@ -208,6 +210,7 @@ var UpcomingInterviews = React.createClass({
 							NProgress.done(); 
 
 						});
+						}
 
 					});				
 
