@@ -213,7 +213,10 @@ var UpcomingInterviews = React.createClass({
 
 
 				});	
-			}	
+			}
+			
+
+			NProgress.done(); 
 
 		});
 		

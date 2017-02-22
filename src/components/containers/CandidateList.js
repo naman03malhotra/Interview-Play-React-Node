@@ -138,12 +138,31 @@
 					}
 				}
 
+
 				that.setState({
 					Data: newData
 				});
 				alert('Candidate Deleted!');
 				$('#modal-update').modal('hide');
 			});
+
+			//BugFix: Delete Bug fixed
+			//Deletes interview info as well, while deleting candidate
+			APIManager.get('/api/intPlay/?user_id='+id, null, function(res){
+				
+				var idUpcomingInt = res.results[0]._id;
+				//console.log(idUpcomingInt);
+				if(idUpcomingInt !== undefined) {
+
+					APIManager.delete('/api/intPlay/'+idUpcomingInt, function(res){
+						console.log(res);
+					});
+				}
+				
+
+			});
+
+			
 		}
 	},
 	// Show user details, launch Update modal

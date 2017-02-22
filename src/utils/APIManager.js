@@ -6,7 +6,7 @@
 module.exports = {
 
 	get: (url, params, callback) => {
-		var datax = (params != null)? $.params(params) : null;
+		var datax = (params != null)? params : '';
 		$.ajax({
 			url: url,
 			type: 'GET',
