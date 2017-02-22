@@ -150,9 +150,10 @@
 			//Deletes interview info as well, while deleting candidate
 			APIManager.get('/api/intPlay/?user_id='+id, null, function(res){
 				
-				var idUpcomingInt = res.results[0]._id;
+				
 				//console.log(idUpcomingInt);
-				if(idUpcomingInt !== undefined) {
+				if(res.results.length>0) {
+					var idUpcomingInt = res.results[0]._id;
 
 					APIManager.delete('/api/intPlay/'+idUpcomingInt, function(res){
 						console.log(res);
