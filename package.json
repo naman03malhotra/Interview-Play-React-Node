@@ -38,6 +38,7 @@
     "react-dragula": "^1.1.17",
     "react-tooltip": "^3.2.7",
     "uglify-js": "^2.7.5",
+    "valid-url": "^1.0.9",
     "webpack": "^2.2.1"
   }
 }

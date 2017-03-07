@@ -5,7 +5,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom')
 var dragula = require('react-dragula');
-var ReactTooltip = require('react-tooltip')
+var ReactTooltip = require('react-tooltip');
+var validUrl = require('valid-url');
 
 
 
@@ -15,6 +16,8 @@ var MyList = React.createClass({
        
         var listMapped = this.props.listData.map(function(list, index){
 
+            list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.href+'images/dummy.png';
+            
             return (
                 
                                     <li onClick={this.props.onClick} key={index} id={list._id} className="list-group-item card_org">

@@ -4,6 +4,7 @@
 
 var React = require('react');
 var ReactTooltip = require('react-tooltip');
+var validUrl = require('valid-url');
 
 
 
@@ -13,6 +14,8 @@ var UpcomingList = React.createClass({
     
         var listMapped = this.props.listData.map(function(list, index){
            var date = new Date(list.timeOfInterview).toGMTString();
+           list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.href+'images/dummy.png';
+
             return (
                 
                                     <li  key={index} id={list._id} className="list-group-item card_org">
