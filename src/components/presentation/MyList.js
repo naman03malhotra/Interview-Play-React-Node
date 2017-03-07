@@ -16,7 +16,7 @@ var MyList = React.createClass({
        
         var listMapped = this.props.listData.map(function(list, index){
 
-            list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.origin+'images/dummy.png';
+            list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.origin+'/images/dummy.png';
 
             return (
                 
