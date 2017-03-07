@@ -14,7 +14,7 @@ var UpcomingList = React.createClass({
     
         var listMapped = this.props.listData.map(function(list, index){
            var date = new Date(list.timeOfInterview).toGMTString();
-           list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.href+'images/dummy.png';
+           list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.origin+'images/dummy.png';
 
             return (
                 

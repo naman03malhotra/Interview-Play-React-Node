@@ -16,8 +16,8 @@ var MyList = React.createClass({
        
         var listMapped = this.props.listData.map(function(list, index){
 
-            list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.href+'images/dummy.png';
-            
+            list.picture = (validUrl.isUri(list.picture))?list.picture:window.location.origin+'images/dummy.png';
+
             return (
                 
                                     <li onClick={this.props.onClick} key={index} id={list._id} className="list-group-item card_org">
