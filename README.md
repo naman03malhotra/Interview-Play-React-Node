@@ -1,4 +1,4 @@
-# Interview Play - HackerRank
+# Interview Play
 
 Assign Interviews using a drag and drop interface.
 
